@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create 3 IAM users with login password and EC2FullAccess policy
+
+Resources:
+
+  UserRahul:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: Rahul
+      LoginProfile:
+        Password: Rahul@123
+        PasswordResetRequired: true
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+
+  UserSagar:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: Sagar
+      LoginProfile:
+        Password: Sagar@123
+        PasswordResetRequired: true
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+
+  UserAmit:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: Amit
+      LoginProfile:
+        Password: Amit@123
+        PasswordResetRequired: true
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+
+ 
+
