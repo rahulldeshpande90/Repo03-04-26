@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Launch a Linux instance
+Resources:
+  MyEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: t3.micro
+      ImageId: ami-0b0b78dcacbab728f
+      KeyName: MyKeyPair5
+      Tags:
+        - Key: Name
+          Value: LinuxInstance-1
