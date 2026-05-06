@@ -1,0 +1,138 @@
+1. What is a VPC?
+
+Answer:
+A VPC (Virtual Private Cloud) is a logically isolated network in AWS where you can launch resources like EC2 instances. It gives full control over IP range, subnets, routing, and security.
+
+2. What is CIDR in VPC?
+
+Answer:
+CIDR (Classless Inter-Domain Routing) defines the IP range of the VPC.
+Example: 10.0.0.0/16 → gives 65,536 IP addresses.
+
+3. Difference between Public and Private Subnet?
+
+Answer:
+
+Public Subnet	                           Private Subnet
+Has route to Internet Gateway	         No direct internet access
+Used for web servers	                  Used for DB, backend
+Can have public IP	                       Usually no public IP
+
+4. What is an Internet Gateway (IGW)?
+
+Answer:
+IGW allows communication between VPC and the internet. It is attached to the VPC and used in public subnet route tables.
+
+5. What is a NAT Gateway?
+
+Answer:
+NAT Gateway allows instances in private subnet to access internet without exposing them publicly (for updates, patches, etc.).
+
+
+6. Difference between Security Group and NACL?
+Security Group	      NACL
+Instance level	     Subnet level
+Stateful	         Stateless
+Allow rules only	 Allow + Deny
+Default deny	     Default allow
+
+7. What is Stateful vs Stateless?
+Stateful (Security Group): Automatically allows response traffic
+Stateless (NACL): You must define inbound + outbound rules explicitly
+
+8. What is a Route Table?
+
+Answer:
+Defines how traffic flows in the VPC. It contains rules like:
+
+0.0.0.0/0 → IGW (internet access)
+10.0.1.0/24 → local
+
+9. What is VPC Peering?
+
+Answer:
+Connects two VPCs privately using AWS network. No internet involved.
+
+10. Can VPC Peering be transitive?
+
+Answer:
+❌ No, VPC Peering is not transitive.
+
+11. What is VPC Endpoint?
+
+Answer:
+Allows private connection to AWS services (like S3, DynamoDB) without internet.
+
+Types:
+
+Interface Endpoint
+Gateway Endpoint
+
+12. Your EC2 in private subnet cannot access internet. What will you check?
+
+Answer:
+
+NAT Gateway exists?
+Route table → 0.0.0.0/0 → NAT Gateway
+NAT Gateway in public subnet?
+Internet Gateway attached?
+
+13. Unable to SSH into EC2 instance. What could be issue?
+
+Answer:
+
+Security group → Port 22 open?
+Correct key pair?
+Public IP attached?
+NACL blocking?
+
+14. Website not accessible though instance is running. Why?
+
+Answer:
+
+Security group → Port 80/443 open?
+Route table configured?
+Application running?
+NACL issue?
+
+15. How will you design a highly available VPC architecture?
+
+Answer:
+
+Multiple AZs
+Public + Private subnets in each AZ
+Load Balancer in public subnet
+Auto Scaling group in private subnet
+NAT Gateway per AZ
+
+16. Difference between NAT Gateway and NAT Instance?
+NAT Gateway	                 NAT Instance
+Managed by AWS	              Manual EC2
+High availability	          Need setup
+Auto scaling	               Manual
+Costly	                       Cheaper
+
+17. What is Elastic IP?
+
+Answer:
+Static public IP that can be attached to EC2 instance.
+
+18. What is Flow Logs in VPC?
+
+Answer:
+Captures network traffic logs for monitoring and troubleshooting.
+
+19. How do you secure VPC?
+
+Answer:
+
+Use private subnets
+Security groups + NACL
+No direct SSH (use bastion host)
+Enable VPC flow logs
+IAM roles
+
+20. What is Bastion Host?
+
+Answer:
+A server in public subnet used to access private instances securely via SSH.
